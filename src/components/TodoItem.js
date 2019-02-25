@@ -11,21 +11,36 @@ export class TodoItem extends Component {
     };
   };
 
+ 
+
   render() {
     // Destructuring
     const { id, title } = this.props.todo;
+    let button;
+
+    if (this.props.todo.completed) {
+          button = <input
+            type="checkbox"
+            onChange={this.props.toggleComplete.bind(this, id)}
+            checked
+          />
+        
+      } else {
+         button = <input
+            type="checkbox"
+            onChange={this.props.toggleComplete.bind(this, id)}
+          />
+      }
+
+
     return (
       <div style={this.getStyle()}>
         <p>
-          <input
-            type="checkbox"
-            onChange={this.props.toggleComplete.bind(this, id)}
-          />{' '}
+        {button}
           {title}
-          <button
-            onClick={this.props.delTodo.bind(this, id)}
-            style={btnStyle}
-          >x</button>
+          <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
+            x
+          </button>
         </p>
       </div>
     );
